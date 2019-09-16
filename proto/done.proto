@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package done;
+
+service AuthenticationService {
+    rpc RegisterToken(RegisterTokenRequest) returns (RegisterTokenResponse) {}
+    rpc DeleteToken(DeleteTokenRequest) returns (DeleteTokenResponse) {}
+    rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse) {}
+}
+
+message RegisterTokenRequest {
+    string userId = 1;
+}
+
+message RegisterTokenResponse {
+    string Token = 1;
+    Error error = 2;
+}
+
+message DeleteTokenRequest {
+    string Token = 1;
+}
+
+message DeleteTokenResponse {
+    bool deleted = 1;
+    Error error = 2;
+}
+
+message ValidateTokenRequest {
+    string Token = 1;
+}
+
+message ValidateTokenResponse {
+    bool valid = 1;
+    string userId = 2;
+    Error error = 3;
+}
+
+message Error {
+    string code = 1;
+    string json = 2;
+    string message = 3;
+}
